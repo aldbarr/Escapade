@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escapade – idées de sorties en Suisse</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f3;--card:#fff;--ink:#18181b;--mut:#71717a;--line:#e7e5e0;--chip:#efede8;--acc:#e0442f;--ok:#0f766e;--r:16px}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--card:#1c1c1f;--ink:#f4f4f5;--mut:#a1a1aa;--line:#2c2c31;--chip:#27272b}}
+*{box-sizing:border-box}html,body{margin:0}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.4}
+button,select{font:inherit;color:inherit}button{cursor:pointer}a{color:inherit}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px)}
+.bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:8px;padding:10px 16px}
+.logo{font-weight:800;font-size:19px;letter-spacing:-.03em;margin-right:auto;display:flex;gap:7px;align-items:center}
+.logo i{font-style:normal;display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--acc);color:#fff;font-size:15px}
+.pill{display:flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 4px 0 10px;height:36px}
+.pill select{border:0;background:none;font-weight:600;padding:0 4px;height:34px;max-width:150px;outline:none}
+.ibtn{height:36px;min-width:36px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 10px;font-weight:600}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;background:var(--card);padding:2px}
+.lang button{border:0;background:none;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:700;color:var(--mut)}
+.lang button.on{background:var(--ink);color:var(--bg)}
+.rail{max-width:1200px;width:100%;margin:auto;display:flex;gap:8px;overflow-x:auto;padding:6px 16px 12px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.tile{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;width:78px;padding:9px 4px;border-radius:14px;border:1px solid var(--line);background:var(--card);font-size:12px;font-weight:600}
+.tile b{font-size:22px;line-height:1}
+.tile.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{max-width:1200px;margin:auto;padding:0 16px 90px}
+.status{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 6px}
+#q{height:36px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 12px;font:inherit;color:inherit;width:150px}
+.status .count{font-weight:800;font-size:20px;letter-spacing:-.02em;margin-right:auto}
+.tag{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--chip);border:0}
+.tag.x::after{content:" ✕";opacity:.6}
+.fbtn{font-weight:700}
+.fbtn span{background:var(--acc);color:#fff;border-radius:999px;padding:0 6px;margin-left:4px;font-size:11px}
+h2{font-size:17px;margin:22px 0 10px;letter-spacing:-.01em}
+h2 small{color:var(--mut);font-weight:500;font-size:13px;margin-left:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;text-align:left;padding:0;transition:transform .12s,box-shadow .12s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.thumb{height:84px;display:grid;place-items:center;font-size:38px;position:relative}
+.rib{position:absolute;left:8px;top:8px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.92);color:#18181b}
+.rib.end{background:#e0442f;color:#fff}.rib.live{background:#0f766e;color:#fff}.rib.soon{background:#f59e0b;color:#fff}
+.star{position:absolute;right:8px;top:8px;font-size:11px;font-weight:800;background:rgba(255,255,255,.92);color:#0f766e;padding:3px 7px;border-radius:999px}
+.cb{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cb h3{margin:0;font-size:15px;line-height:1.25;font-weight:700}
+.meta{font-size:13px;color:var(--mut)}
+.foot{display:flex;align-items:center;gap:6px;margin-top:auto;padding-top:4px}
+.price{font-weight:700;font-size:13px;margin-right:auto}
+.price.free{color:var(--ok)}
+.ic{font-size:13px;filter:grayscale(0)}.ic.off{opacity:.22;filter:grayscale(1)}
+.more{display:block;margin:14px auto 0;border:1px dashed var(--line);background:none;border-radius:12px;padding:10px 16px;color:var(--mut);font-weight:600}
+.empty{color:var(--mut);padding:30px;text-align:center;border:1px dashed var(--line);border-radius:var(--r)}
+footer{max-width:1200px;margin:10px auto 0;padding:16px;color:var(--mut);font-size:12px}
+footer button{border:0;background:none;text-decoration:underline;padding:0;color:inherit;font-size:12px}
+.fab{position:fixed;right:16px;bottom:16px;z-index:25;background:var(--acc);color:#fff;border:0;border-radius:999px;padding:13px 18px;font-weight:700;box-shadow:0 8px 24px rgba(224,68,47,.35)}
+/* sheets */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;z-index:50;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+@media(min-width:700px){.ov{align-items:center}}
+.sheet{background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:0 0 14px}
+@media(min-width:700px){.sheet{border-radius:20px}}
+.sh-h{position:sticky;top:0;background:var(--card);padding:16px 18px 8px;display:flex;align-items:center;gap:10px;z-index:1}
+.sh-h h3{margin:0;font-size:18px;flex:1}
+.x{border:0;background:var(--chip);border-radius:999px;width:32px;height:32px;font-size:15px}
+.sb{padding:0 18px}
+.dthumb{height:120px;display:grid;place-items:center;font-size:56px;border-radius:14px;margin-bottom:12px;position:relative}
+.drow{display:grid;grid-template-columns:28px 1fr;gap:4px 8px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.drow .k{font-size:17px}
+.drow small{color:var(--mut);display:block}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}
+.acts a{display:flex;align-items:center;gap:8px;justify-content:center;text-decoration:none;font-weight:700;font-size:14px;padding:12px;border-radius:12px;border:1px solid var(--line)}
+.acts a.pri{grid-column:1/-1;background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.acts a:nth-child(even):last-child{grid-column:1/-1}
+.facts{display:grid;grid-template-columns:1fr 1fr;column-gap:14px}
+@media(max-width:420px){.facts{grid-template-columns:1fr}}
+.desc{margin:0 0 8px;color:var(--mut)}
+.addr{display:inline-block;margin:0 0 4px;font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px dashed var(--line)}
+.fgroup{margin:6px 0 14px}.fgroup p{margin:0 0 7px;font-weight:700;font-size:14px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600}
+.seg button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sfoot{display:flex;gap:8px;padding:10px 18px calc(10px + env(safe-area-inset-bottom));position:sticky;bottom:0;background:var(--card);border-top:1px solid var(--line);margin-top:8px;z-index:3}
+.btn{flex:1;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px;font-weight:700}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:12px 10px;text-align:left;font-weight:600;font-size:14px}
+.opt b{display:block;font-size:24px;margin-bottom:2px}
+.opt.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 9%,var(--card))}
+.prog{display:flex;gap:4px;margin:0 0 14px}.prog i{flex:1;height:4px;border-radius:2px;background:var(--line)}.prog i.on{background:var(--acc)}
+.q{font-size:17px;font-weight:700;margin:0 0 12px}
+.src a{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);text-decoration:none;font-size:14px}
+.src a span{color:var(--mut);font-size:12px;white-space:nowrap}
+@media(max-width:560px){.logo span{display:none}.bar{gap:6px;padding:8px 12px}.pill select{max-width:96px}.lang button{padding:5px 6px}.rail{padding:4px 12px 10px}.tile{width:70px}main{padding:0 12px 90px}.grid{grid-template-columns:1fr 1fr;gap:10px}.thumb{height:70px;font-size:32px}.cb h3{font-size:14px}.meta{font-size:12px}.foot .ic{font-size:11px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+@media(max-width:560px){.dthumb{height:80px;font-size:40px}}
+html,body{overflow-x:hidden}
+.bar2{max-width:1200px;margin:auto;display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;scrollbar-width:none;align-items:center}
+.bar2::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;height:32px}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select.chip{appearance:none;-webkit-appearance:none;padding-right:12px}
+.sep{flex:none;width:1px;height:20px;background:var(--line);margin:0 4px}
+.tile{width:96px}
+.hrail{display:grid;grid-auto-flow:column;grid-auto-columns:230px;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.stp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:3px 4px 3px 12px;font-size:13px;font-weight:600}
+.stp button{width:28px;height:28px;border-radius:999px;padding:0;border:1px solid var(--line)}
+.stps{display:flex;flex-direction:column;gap:10px;grid-column:1/-1}
+.stpbig{display:grid;grid-template-columns:1fr 52px 40px 52px;align-items:center;gap:8px;font-weight:700}
+.stpbig .opt{text-align:center;font-size:22px;padding:6px}.stpbig b{text-align:center;font-size:20px}
+button.tag{border:0;cursor:pointer}
+.fav{position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:18px;color:#18181b;cursor:pointer;line-height:1}
+.fav.on{color:#e0442f}
+.star{top:auto;bottom:8px;right:auto;left:8px;font-size:11px;font-weight:700;padding:4px 8px}
+.hfav{border:0;background:var(--chip);border-radius:999px;width:32px;height:32px;font-size:17px;line-height:1}
+.hfav.on{color:#e0442f}
+:root{--lift:0px}
+.bnav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + var(--lift) + env(safe-area-inset-bottom));z-index:30;display:flex;gap:2px;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.14);width:min(440px,calc(100% - 24px))}
+.bnav button{flex:1;border:0;background:none;border-radius:16px;padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--mut)}
+.bnav button b{font-size:19px;line-height:1.1;position:relative;color:var(--ink)}
+.bnav button b i{position:absolute;top:-4px;right:-12px;font-style:normal;font-size:10px;background:var(--acc);color:#fff;border-radius:999px;padding:1px 5px}
+.bnav button.on{background:var(--ink);color:var(--bg)}.bnav button.on b{color:var(--bg)}
+.fab{bottom:calc(84px + var(--lift) + env(safe-area-inset-bottom))!important}
+main{padding-bottom:calc(170px + var(--lift))!important}
+footer{padding-bottom:110px}
+body.favview .rail,body.favview .bar2{display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(20px);bottom:calc(150px + var(--lift) + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:12px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:40}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:560px){#btnF{display:none}#q{flex:1;width:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="logo"><i>✦</i><span>Escapade</span></div>
+    <label class="pill" title="départ">📍<select id="from"></select></label>
+    <div class="lang" id="lang"></div>
+    <button class="ibtn" id="btnProfile">👤</button>
+  </div>
+  <nav class="rail" id="rail"></nav>
+  <div class="bar2" id="bar2"></div>
+</header>
+<main>
+  <div class="status" id="status"></div>
+  <div id="list"></div>
+</main>
+<footer id="foot"></footer>
+<button class="fab" id="fab"></button>
+<nav class="bnav" id="nav"></nav>
+<div class="toast" id="toast"></div>
+<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+
+<script>
+/* Hébergement autonome (Netlify, GitHub Pages…) : on remonte la barre du bas pour laisser la place au badge de l'hébergeur. Ajuster NAV_LIFT si besoin (px). */
+const NAV_LIFT=56;try{if(window.self===window.top)document.documentElement.style.setProperty("--lift",NAV_LIFT+"px")}catch(e){}
+const I={
+fr:{tiles:{all:"Tout",weekend:"Week-end",festive:"Noël & fêtes",museum:"Musées",swim:"Piscines",culture:"Expos",ski:"Ski & neige",hike:"Balades",view:"Points de vue",wellness:"Bains",sport:"Sport",kids:"Enfants",free:"Gratuit",rain:"Pluie",pmr:"Accessible",music:"Spectacles",nature:"Nature",food:"Gourmand",fun:"Loisirs"},
+count:n=>`${n} idée${n>1?"s":""}`,filters:"Filtres",sec:{now:"À l'affiche",soon:"Bientôt",always:"Toute l'année",closed:"Hors saison"},showMore:n=>`Voir ${n} de plus`,
+st:{perm:"Toute l'année",open:"Ouvert",until:d=>`Jusqu'au ${d}`,last:n=>n<=0?"Dernier jour":`Encore ${n} j`,from:d=>`Dès le ${d}`,closed:m=>`Dès ${m}`},
+free:"Gratuit",see:"Voir site",from:"dès",
+lab:{price:"Prix",time:"Trajet",park:"Parking",ev:"Recharge",food:"Manger",pmr:"Accessibilité",dur:"Durée",where:"Lieu",io:"Lieu couvert"},
+park:{yes:"Gratuit sur place",paid:"Payant sur place",limited:"Peu de places",no:"Pas de parking",unk:"À vérifier"},
+ev:{yes:"Bornes sur place",near:"Bornes à proximité",unk:"À vérifier",no:"Aucune borne"},
+food:{2:"Restaurant sur place",1:"Buvette / à proximité",0:"Rien sur place – pique-nique",null:"À vérifier"},
+pmr:{2:"Accessible en fauteuil",1:"Partiellement / avec aide",0:"Difficile (escaliers, terrain)",null:"À vérifier auprès du lieu"},
+io:{true:"Intérieur",false:"Extérieur",mix:"Intérieur et extérieur"},
+car:"en voiture",train:"en train/TP",adult:"adulte",child:"enfant",
+act:{find:"Trouver le site",addr:"Adresse",site:"Site officiel",sbb:"Horaire CFF",car:"Itinéraire",park:"Parkings",ev:"Bornes ⚡",food:"Restos"},
+f:{price:"Budget",pAll:"Tous",p0:"Gratuit",p20:"≤ 20",p50:"≤ 50",time:"Trajet max.",tAll:"Peu importe",park:"Voiture",pk:"Parking sur place",ev:"Borne de recharge",food:"Manger sur place",pmr:"Accessibilité",reset:"Réinitialiser",apply:"Voir les idées"},
+wiz:{title:"Votre profil",who:"Vous sortez plutôt…",whoO:{solo:["🧘","Seul·e"],couple:["💑","À deux"],kids:["👨‍👩‍👧","En famille"],friends:["🎉","Entre amis"],seniors:["🌿","Tranquille"]},age:"Âge du plus jeune ?",ages:{0:"0–2 ans",3:"3–5 ans",6:"6–9 ans",10:"10 ans +"},mob:"Mobilité",mobO:{none:["🚶","Aucune contrainte"],stroller:["👶","Poussette"],reduced:["🦯","Mobilité réduite"],wheel:["♿","Fauteuil roulant"]},likes:"Vos envies",budget:"Budget / adulte",bud:{0:["🆓","Gratuit"],20:["💰","≤ CHF 20"],50:["💰💰","≤ CHF 50"],999:["💎","Peu importe"]},move:"Vous vous déplacez en…",moveO:{car:["🚗","Voiture"],ev:["⚡","Électrique"],pt:["🚆","Train / bus"]},next:"Suivant",back:"Retour",done:"C'est parti"},
+prof:"Profil",surprise:"🎲 Surprends-moi",sources:"Agendas officiels",srcT:"Agendas officiels suivis",srcS:"Sources consultées à chaque mise à jour (lundi et jeudi).",
+foot:d=>`Mis à jour le ${d} · Prix et horaires indicatifs, à vérifier sur le site officiel. Temps de trajet estimés.`,empty:"Rien ne correspond. Retirez un filtre.",months:["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."],sbbPath:"fr/acheter"},
+en:{tiles:{all:"All",weekend:"Weekend",festive:"Christmas",museum:"Museums",swim:"Pools",culture:"Exhibitions",ski:"Ski & snow",hike:"Easy walks",view:"Viewpoints",wellness:"Spas",sport:"Sport",kids:"Kids",free:"Free",rain:"Rainy day",pmr:"Accessible",music:"Shows",nature:"Nature",food:"Food",fun:"Fun"},
+count:n=>`${n} idea${n>1?"s":""}`,filters:"Filters",sec:{now:"On now",soon:"Coming up",always:"All year",closed:"Off season"},showMore:n=>`Show ${n} more`,
+st:{perm:"All year",open:"Open",until:d=>`Until ${d}`,last:n=>n<=0?"Last day":`${n} days left`,from:d=>`From ${d}`,closed:m=>`From ${m}`},
+free:"Free",see:"See site",from:"from",
+lab:{price:"Price",time:"Travel",park:"Parking",ev:"Charging",food:"Food",pmr:"Accessibility",dur:"Duration",where:"Where",io:"Setting"},
+park:{yes:"Free on site",paid:"Paid on site",limited:"Few spaces",no:"No parking",unk:"To check"},
+ev:{yes:"Chargers on site",near:"Chargers nearby",unk:"To check",no:"No charger"},
+food:{2:"Restaurant on site",1:"Snack bar / nearby",0:"Nothing on site – picnic",null:"To check"},
+pmr:{2:"Wheelchair accessible",1:"Partly / with help",0:"Difficult (stairs, terrain)",null:"Check with the venue"},
+io:{true:"Indoor",false:"Outdoor",mix:"Indoor & outdoor"},
+car:"by car",train:"by train/bus",adult:"adult",child:"child",
+act:{find:"Find website",addr:"Address",site:"Official site",sbb:"SBB timetable",car:"Directions",park:"Parking",ev:"Chargers ⚡",food:"Restaurants"},
+f:{price:"Budget",pAll:"Any",p0:"Free",p20:"≤ 20",p50:"≤ 50",time:"Max travel",tAll:"Any",park:"Car",pk:"Parking on site",ev:"EV charging",food:"Food on site",pmr:"Accessibility",reset:"Reset",apply:"Show ideas"},
+wiz:{title:"Your profile",who:"You usually go out…",whoO:{solo:["🧘","Solo"],couple:["💑","As a couple"],kids:["👨‍👩‍👧","With family"],friends:["🎉","With friends"],seniors:["🌿","Easy pace"]},age:"Youngest child's age?",ages:{0:"0–2",3:"3–5",6:"6–9",10:"10+"},mob:"Mobility",mobO:{none:["🚶","No constraint"],stroller:["👶","Stroller"],reduced:["🦯","Reduced mobility"],wheel:["♿","Wheelchair"]},likes:"What you enjoy",budget:"Budget / adult",bud:{0:["🆓","Free"],20:["💰","≤ CHF 20"],50:["💰💰","≤ CHF 50"],999:["💎","Any"]},move:"You travel by…",moveO:{car:["🚗","Car"],ev:["⚡","Electric car"],pt:["🚆","Train / bus"]},next:"Next",back:"Back",done:"Let's go"},
+prof:"Profile",surprise:"🎲 Surprise me",sources:"Official event calendars",srcT:"Official calendars we follow",srcS:"Checked at every update (Monday and Thursday).",
+foot:d=>`Updated ${d} · Prices and hours are indicative – check the official site. Travel times are estimates.`,empty:"Nothing matches. Remove a filter.",months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],sbbPath:"en/buying"},
+de:{tiles:{all:"Alle",weekend:"Wochenende",festive:"Weihnachten",museum:"Museen",swim:"Bäder",culture:"Ausstellungen",ski:"Ski & Schnee",hike:"Spaziergänge",view:"Aussicht",wellness:"Thermen",sport:"Sport",kids:"Kinder",free:"Gratis",rain:"Regen",pmr:"Barrierefrei",music:"Shows",nature:"Natur",food:"Kulinarik",fun:"Freizeit"},
+count:n=>`${n} Idee${n>1?"n":""}`,filters:"Filter",sec:{now:"Jetzt",soon:"Demnächst",always:"Ganzjährig",closed:"Ausser Saison"},showMore:n=>`${n} weitere`,
+st:{perm:"Ganzjährig",open:"Offen",until:d=>`Bis ${d}`,last:n=>n<=0?"Letzter Tag":`Noch ${n} T.`,from:d=>`Ab ${d}`,closed:m=>`Ab ${m}`},
+free:"Gratis",see:"Website",from:"ab",
+lab:{price:"Preis",time:"Anreise",park:"Parking",ev:"Laden",food:"Essen",pmr:"Zugänglichkeit",dur:"Dauer",where:"Ort",io:"Art"},
+park:{yes:"Gratis vor Ort",paid:"Kostenpflichtig",limited:"Wenig Plätze",no:"Kein Parking",unk:"Zu prüfen"},
+ev:{yes:"Ladestationen vor Ort",near:"Ladestationen in der Nähe",unk:"Zu prüfen",no:"Keine Ladestation"},
+food:{2:"Restaurant vor Ort",1:"Kiosk / in der Nähe",0:"Nichts vor Ort – Picknick",null:"Zu prüfen"},
+pmr:{2:"Rollstuhlgängig",1:"Teilweise / mit Hilfe",0:"Schwierig (Treppen, Gelände)",null:"Beim Ort nachfragen"},
+io:{true:"Drinnen",false:"Draussen",mix:"Drinnen & draussen"},
+car:"mit Auto",train:"mit ÖV",adult:"Erw.",child:"Kind",
+act:{find:"Website suchen",addr:"Adresse",site:"Website",sbb:"SBB-Fahrplan",car:"Route",park:"Parkplätze",ev:"Ladestationen ⚡",food:"Restaurants"},
+f:{price:"Budget",pAll:"Alle",p0:"Gratis",p20:"≤ 20",p50:"≤ 50",time:"Max. Anreise",tAll:"Egal",park:"Auto",pk:"Parking vor Ort",ev:"Ladestation",food:"Essen vor Ort",pmr:"Zugänglichkeit",reset:"Zurücksetzen",apply:"Ideen zeigen"},
+wiz:{title:"Dein Profil",who:"Du bist meist unterwegs…",whoO:{solo:["🧘","Allein"],couple:["💑","Zu zweit"],kids:["👨‍👩‍👧","Mit Familie"],friends:["🎉","Mit Freunden"],seniors:["🌿","Gemütlich"]},age:"Alter des jüngsten Kindes?",ages:{0:"0–2",3:"3–5",6:"6–9",10:"10+"},mob:"Mobilität",mobO:{none:["🚶","Keine Einschränkung"],stroller:["👶","Kinderwagen"],reduced:["🦯","Eingeschränkt"],wheel:["♿","Rollstuhl"]},likes:"Worauf du Lust hast",budget:"Budget / Erw.",bud:{0:["🆓","Gratis"],20:["💰","≤ CHF 20"],50:["💰💰","≤ CHF 50"],999:["💎","Egal"]},move:"Du reist mit…",moveO:{car:["🚗","Auto"],ev:["⚡","E-Auto"],pt:["🚆","Zug / Bus"]},next:"Weiter",back:"Zurück",done:"Los geht's"},
+prof:"Profil",surprise:"🎲 Überrasch mich",sources:"Offizielle Agenden",srcT:"Offizielle Agenden",srcS:"Bei jedem Update geprüft (Montag und Donnerstag).",
+foot:d=>`Aktualisiert am ${d} · Preise und Zeiten sind Richtwerte – bitte auf der offiziellen Website prüfen. Reisezeiten geschätzt.`,empty:"Nichts gefunden. Filter entfernen.",months:["Jan.","Feb.","März","Apr.","Mai","Juni","Juli","Aug.","Sept.","Okt.","Nov.","Dez."],sbbPath:"de/kaufen"}
+};
+const CAT={festive:["🎄","#fde2dc"],museum:["🏛️","#ece6dc"],culture:["🖼️","#e4e7fb"],music:["🎭","#f3e3f7"],nature:["🦌","#dcf1e4"],hike:["🥾","#e3efd6"],view:["🏔️","#dceaf7"],wellness:["♨️","#fbeedd"],sport:["🎾","#e3f2e6"],swim:["🏊","#d8eefa"],ski:["⛷️","#dcecf6"],fun:["🎢","#fff1c7"],food:["🧀","#fbe9c9"]};
+const TILE_IC={all:"✨",weekend:"📅",festive:"🎄",museum:"🏛️",swim:"🏊",ski:"⛷️",culture:"🖼️",hike:"🥾",view:"🏔️",wellness:"♨️",sport:"🎾",kids:"🧸",free:"🆓",rain:"☔",pmr:"♿",music:"🎭",nature:"🦌",food:"🧀",fun:"🎢"};
+const PLACES={"Genève":[46.2044,6.1432],"Nyon":[46.3833,6.2398],"Morges":[46.5113,6.4985],"Lausanne":[46.5197,6.6323],"Vevey":[46.4628,6.8419],"Montreux":[46.4312,6.9107],"Aigle":[46.3187,6.9706],"Yverdon-les-Bains":[46.7785,6.6412],"Neuchâtel":[46.99,6.9293],"La Chaux-de-Fonds":[47.1035,6.8328],"Delémont":[47.3653,7.3445],"Porrentruy":[47.4153,7.0757],"Biel/Bienne":[47.1368,7.2468],"Fribourg":[46.8065,7.162],"Bulle":[46.6193,7.057],"Payerne":[46.822,6.938],"Martigny":[46.1028,7.0727],"Monthey":[46.2551,6.9547],"Sion":[46.2331,7.3606],"Sierre":[46.2919,7.5356],"Brig":[46.3159,7.9878],"Bern":[46.948,7.4474],"Thun":[46.758,7.628],"Interlaken":[46.6863,7.8632],"Luzern":[47.0502,8.3093],"Zug":[47.1662,8.5155],"Zürich":[47.3769,8.5417],"Basel":[47.5596,7.5886],"Solothurn":[47.2088,7.5323]};
+const X={
+fr:{forYou:"Pour vous",nav:{explore:"Explorer",fav:"Favoris",filters:"Filtres",profile:"Profil"},favT:"Mes favoris",favEmpty:"Touchez ♡ sur une activité pour la retrouver ici.",favAdd:"Ajouté aux favoris",favRem:"Retiré des favoris",favPast:"Terminés",uni:{all:"Tout",fetes:"Fêtes & marchés",culture:"Culture",outdoor:"Plein air",sport:"Sport",food:"Gourmand",relax:"Détente & loisirs"},market:"Brocantes & marchés",subAll:"Tout",
+when:{all:"Quand ?",today:"Aujourd'hui",weekend:"Ce week-end",month:"Ce mois-ci"},quick:{free:"🆓 Gratuit",rain:"☔ Pluie",pmr:"♿ Accessible",kids:"🧸 Enfants"},
+miss:"⏳ À ne pas manquer",ideas:"Toutes les idées",ideasMore:"Autres idées",closed:"Hors saison",showClosed:n=>`Voir ${n} activités hors saison`,
+grp:(a,c)=>`${a} adulte${a>1?"s":""}${c?` + ${c} enfant${c>1?"s":""}`:""}`,total:"Total pour",size:"Combien êtes-vous ?",adults:"Adultes",children:"Enfants",people:"Participants",perPers:"par pers."},
+en:{forYou:"For you",nav:{explore:"Explore",fav:"Favourites",filters:"Filters",profile:"Profile"},favT:"My favourites",favEmpty:"Tap ♡ on an activity to save it here.",favAdd:"Added to favourites",favRem:"Removed from favourites",favPast:"Finished",uni:{all:"All",fetes:"Festivals & markets",culture:"Culture",outdoor:"Outdoors",sport:"Sport",food:"Food",relax:"Relax & fun"},market:"Flea & local markets",subAll:"All",
+when:{all:"When?",today:"Today",weekend:"This weekend",month:"This month"},quick:{free:"🆓 Free",rain:"☔ Rainy",pmr:"♿ Accessible",kids:"🧸 Kids"},
+miss:"⏳ Don't miss",ideas:"All ideas",ideasMore:"More ideas",closed:"Off season",showClosed:n=>`Show ${n} off-season activities`,
+grp:(a,c)=>`${a} adult${a>1?"s":""}${c?` + ${c} child${c>1?"ren":""}`:""}`,total:"Total for",size:"How many are you?",adults:"Adults",children:"Children",people:"Group",perPers:"per person"},
+de:{forYou:"Für dich",nav:{explore:"Entdecken",fav:"Favoriten",filters:"Filter",profile:"Profil"},favT:"Meine Favoriten",favEmpty:"Tippe ♡ bei einer Aktivität, um sie hier zu speichern.",favAdd:"Zu Favoriten hinzugefügt",favRem:"Aus Favoriten entfernt",favPast:"Vorbei",uni:{all:"Alle",fetes:"Feste & Märkte",culture:"Kultur",outdoor:"Draussen",sport:"Sport",food:"Kulinarik",relax:"Entspannung & Spass"},market:"Flohmärkte & Märkte",subAll:"Alle",
+when:{all:"Wann?",today:"Heute",weekend:"Wochenende",month:"Diesen Monat"},quick:{free:"🆓 Gratis",rain:"☔ Regen",pmr:"♿ Barrierefrei",kids:"🧸 Kinder"},
+miss:"⏳ Nicht verpassen",ideas:"Alle Ideen",ideasMore:"Weitere Ideen",closed:"Ausser Saison",showClosed:n=>`${n} Aktivitäten ausser Saison zeigen`,
+grp:(a,c)=>`${a} Erw.${c?` + ${c} Kind${c>1?"er":""}`:""}`,total:"Total für",size:"Wie viele seid ihr?",adults:"Erwachsene",children:"Kinder",people:"Gruppe",perPers:"pro Pers."}};
+for(const l in X){Object.assign(I[l],X[l]);I[l].tiles.market=X[l].market}
+I.fr.wiz.whoO.team=["🏢","Entreprise"];I.en.wiz.whoO.team=["🏢","Company / team"];I.de.wiz.whoO.team=["🏢","Firma / Team"];
+CAT.market=["🧺","#efe7f7"];
+const UNI={all:["✨",null],fetes:["🎪",["festive","market"]],culture:["🏛️",["museum","culture","music"]],outdoor:["🌲",["hike","view","nature"]],sport:["🎾",["sport","swim","ski"]],food:["🧀",["food"]],relax:["♨️",["wellness","fun"]]};
+let L="fr",DATA=[],SRC=[],UPD="",P=null,S={q:"",qr:"",from:"Lausanne",uni:"all",sub:"all",when:"all",free:false,rain:false,qpmr:false,kids:false,price:"all",time:"all",pk:false,ev:false,food:false,pmr:0},PAGE=1,SHOWCLOSED=false,VIEW="explore",FAV=new Set();
+const isFav=id=>FAV.has(id);function toggleFav(id){FAV.has(id)?FAV.delete(id):FAV.add(id);store.set("esc_fav",[...FAV]);toast(FAV.has(id)?T().favAdd:T().favRem);navbar()}
+function toast(m){const e=$("toast");e.textContent=m;e.classList.add("on");clearTimeout(window._tt);window._tt=setTimeout(()=>e.classList.remove("on"),1600)}
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const T=()=>I[L],tx=v=>typeof v==="string"?v:(v?.[L]||v?.fr||"");
+const today=new Date();today.setHours(0,0,0,0);
+const D=s=>new Date(s+"T00:00:00"),days=(a,b)=>Math.round((b-a)/864e5);
+const fmt=s=>{const d=D(s);return `${d.getDate()} ${T().months[d.getMonth()]}${d.getFullYear()!==today.getFullYear()?" "+String(d.getFullYear()).slice(2):""}`};
+const $=id=>document.getElementById(id);
+function hav(a,b){const r=x=>x*Math.PI/180,dl=r(b[0]-a[0]),dn=r(b[1]-a[1]);const h=Math.sin(dl/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dn/2)**2;return 12742*Math.asin(Math.sqrt(h))}
+const CITYX={"La Chaux-de-Fonds":25,"Le Locle":30,"Saint-Imier":25,"Porrentruy":15,"Delémont":10,"Les Genevez":30,"Moutier":10,"Le Sentier":30,"L'Auberson":35,"Sainte-Croix":30,"Vallorbe":10,"Château-d'Oex":25,"Gruyères":15,"Charmey":25,"Broc":15,"Pringy":10,"Moléson":25,"Le Châble":15,"Verbier":25,"Zermatt":45,"Saas-Fee":50,"Leukerbad":35,"Môtiers":20,"Travers":15,"Les Brenets":25,"Gletterens":20,"Vallon":20,"Avenches":5,"Lucens":10,"Gingins":20,"Echallens":10,"Oron-le-Châtel":15,"Ayent":25,"Crans-Montana":20,"Champex-Lac":35,"Brienz":10,"Meiringen":10,"Alberswil":20,"Root":10,"Fiesch":20,"Lenk":20,"Engelberg":15,"Champéry":20,"Les Crosets":35,"Morgins":30,"Torgon":35,"Aran":10,"Villars-sur-Ollon":20,"Saint-Cergue":20,"Villars-Tiercelin":20};
+function travel(it){const k=hav(PLACES[S.from],[it.lat,it.lon]),km=k*1.25,v=km<15?35:km<50?62:85;return{car:Math.round(km/v*60+(km<3?3:8)),tp:it.pt?Math.round((k<6?8+k*2.5:k*.75+5)+(it.tpx??CITYX[it.city]??0)):null}}
+const hm=m=>m<60?`${m}′`:`${Math.floor(m/60)}h${String(m%60).padStart(2,"0")}`;
+function lv95(lat,lon){const p=(lat*3600-169028.66)/1e4,l=(lon*3600-26782.5)/1e4;return[Math.round(2600072.37+211455.93*l-10938.51*l*p-.36*l*p*p-44.54*l**3),Math.round(1200147.07+308807.95*p+3745.25*l*l+76.63*p*p-194.56*l*l*p+119.79*p**3)]}
+function status(it){const t=T().st,M=today.getMonth()+1;
+  if(it.kind==="perm")return{g:"always",lbl:t.perm,c:"",o:0};
+  if(it.m){if(it.m.includes(M))return{g:"always",lbl:t.open,c:"live",o:0};let n=M;for(let i=0;i<12;i++){n=n%12+1;if(it.m.includes(n))break}return{g:"closed",lbl:t.closed(T().months[n-1]),c:"",o:0}}
+  const f=D(it.from),e=D(it.to);if(e<today)return{g:"past"};
+  if(f<=today){const left=days(today,e);if(it.kind==="season")return{g:"always",lbl:t.open,c:"live",o:left};return{g:"now",lbl:left<=7?t.last(left):t.until(fmt(it.to)),c:left<=7?"end":"live",o:left}}
+  return{g:"soon",lbl:t.from(fmt(it.from)),c:"soon",o:days(today,f)}}
+function within(it,a,b){if(it.m){for(let d=new Date(a);d<=b;d.setDate(d.getDate()+1))if(it.m.includes(d.getMonth()+1))return true;return false}if(it.kind==="perm")return true;return D(it.from)<=b&&D(it.to)>=a}
+function whenOK(it){if(S.when==="all")return true;let a=new Date(today),b=new Date(today);
+  if(S.when==="weekend"){const dw=today.getDay();if(dw!==0&&dw!==6)a.setDate(today.getDate()+(6-dw));b=new Date(a);b.setDate(a.getDate()+(a.getDay()===6?1:0))}
+  else if(S.when==="month")b.setDate(b.getDate()+30);return within(it,a,b)}
+const pmrNeed=()=>Math.max(S.pmr,S.qpmr?2:0,P?.mob==="wheel"?2:(P?.mob==="reduced"||P?.mob==="stroller")?1:0);
+const grp=()=>({a:P?.na??(P?.who==="couple"?2:1),c:P?.nc??0});
+function total(p){if(p.a==null)return null;const g=grp();return p.a*g.a+(p.c??p.a)*g.c}
+function score(it){if(!P)return 0;let s=0;const who=P.who==="team"?"friends":P.who;if(who&&it.aud.includes(who))s+=3;if(P.who==="team"&&["sport","food","culture","museum"].includes(it.cat))s+=2;if(P.likes?.includes(it.cat))s+=3;if(P.budget!=null&&(it.price.a??99)<=P.budget)s+=1;if(P.who==="kids"&&it.age&&P.age!=null&&P.age<it.age)s-=4;if(P.move==="ev"&&it.ev==="yes")s+=1;if(P.move==="pt"&&!it.pt)s-=3;if(pmrNeed()&&it.pmr===2)s+=1;return s-travel(it).car/60}
+function pass(it){const tr=travel(it),u=UNI[S.uni][1];
+  if(u&&!u.includes(it.cat))return false;if(S.sub!=="all"&&it.cat!==S.sub)return false;
+  if(!whenOK(it))return false;
+  if(S.free&&it.price.a!==0)return false;if(S.rain&&it.in===false)return false;if(S.kids&&!it.aud.includes("kids"))return false;
+  if(S.q){const h=(tx(it.t)+" "+it.city+" "+(it.addr||"")).toLowerCase();if(!h.includes(S.q))return false}
+  if(S.price!=="all"&&!(it.price.a!=null&&it.price.a<=+S.price))return false;
+  const tt=(P?.move==="pt"&&tr.tp)?tr.tp:tr.car;if(S.time!=="all"&&tt>+S.time)return false;
+  if(S.pk&&!["yes","paid"].includes(it.park))return false;if(S.ev&&!["yes","near"].includes(it.ev))return false;if(S.food&&it.food<2)return false;
+  const nd=pmrNeed();if(nd&&(it.pmr==null?nd>=2:it.pmr<nd))return false;return true}
+const chf=n=>n%1?n.toFixed(2):n;
+function priceTxt(p,short){const t=T();if(p.a===0&&(p.c===0||p.c==null))return t.free;if(p.a==null)return t.see;if(short){const g=grp(),n=g.a+g.c,tt=total(p);return n>1?`CHF ${chf(tt)} · 👥${n}`:`CHF ${chf(p.a)}`}return `CHF ${chf(p.a)} ${t.adult}${p.c!=null?` · ${p.c===0?t.free:"CHF "+chf(p.c)} ${t.child}`:""}`}
+function card(it,st){const tr=travel(it),[ic,bg]=CAT[it.cat]||["✦","#eee"],free=it.price.a===0;const mine=score(it)>=4;
+  return `<button class="card" data-id="${it.id}"><div class="thumb" style="background:${bg}">${ic}<span class="rib ${st.c}">${st.lbl}</span>${mine?`<span class="star">✨ ${T().forYou}</span>`:""}<span class="fav ${isFav(it.id)?"on":""}" data-fav="${it.id}" role="button" aria-label="favori">${isFav(it.id)?"♥":"♡"}</span></div>
+  <div class="cb"><h3>${tx(it.t)}</h3><div class="meta">${it.city} · 🚗 ${hm(tr.car)}${tr.tp?` · 🚆 ${hm(tr.tp)}`:""}</div>
+  <div class="foot"><span class="price ${free?"free":""}">${priceTxt(it.price,1)}</span><span class="ic ${["yes","paid"].includes(it.park)?"":"off"}">🅿️</span><span class="ic ${["yes","near"].includes(it.ev)?"":"off"}">⚡</span><span class="ic ${it.food>=2?"":"off"}">🍴</span><span class="ic ${it.pmr===2?"":"off"}">♿</span></div></div></button>`}
+function saveS(){const {q,qr,...rest}=S;store.set("esc_s",rest)}
+function render(){const t=T();document.documentElement.lang=L;saveS();navbar();document.body.classList.toggle("favview",VIEW==="fav");
+  $("lang").innerHTML=["fr","en","de"].map(l=>`<button class="${l===L?"on":""}" data-l="${l}">${l.toUpperCase()}</button>`).join("");
+  $("from").innerHTML=Object.keys(PLACES).map(p=>`<option ${p===S.from?"selected":""}>${p}</option>`).join("");
+  $("rail").innerHTML=Object.keys(UNI).map(k=>`<button class="tile ${S.uni===k?"on":""}" data-u="${k}"><b>${UNI[k][0]}</b>${t.uni[k]}</button>`).join("");
+  const u=UNI[S.uni][1];
+  const sub=u&&u.length>1?[`<button class="chip ${S.sub==="all"?"on":""}" data-sub="all">${t.subAll}</button>`,...u.map(c=>`<button class="chip ${S.sub===c?"on":""}" data-sub="${c}">${CAT[c][0]} ${t.tiles[c]}</button>`),'<span class="sep"></span>'].join(""):"";
+  const when=`<select id="when" class="chip ${S.when!=="all"?"on":""}">${Object.entries(t.when).map(([k,v])=>`<option value="${k}" ${S.when===k?"selected":""}>📅 ${v}</option>`).join("")}</select>`;
+  const quick=Object.entries(t.quick).map(([k,v])=>{const key=k==="pmr"?"qpmr":k;return `<button class="chip ${S[key]?"on":""}" data-q="${key}">${v}</button>`}).join("");
+  $("bar2").innerHTML=sub+when+quick;
+  $("fab").textContent=t.surprise;$("btnProfile").title=t.prof;
+  const all=[],closed=[];for(const it of DATA){if(!pass(it))continue;const st=status(it);if(st.g==="past")continue;(st.g==="closed"?closed:all).push([it,st])}
+  const rank=([it,st])=>score(it)+(st.g==="now"?(st.o<=14?2:1):st.g==="soon"&&st.o<=14?1.5:0);
+  all.sort((a,b)=>rank(b)-rank(a)||a[1].o-b[1].o);
+  const miss=all.filter(([it,st])=>it.kind==="event"&&!it.virtual&&((st.g==="now"&&st.o<=14)||(st.g==="soon"&&st.o<=10))).sort((a,b)=>(a[1].g==="now"?a[1].o:a[1].o+.5)-(b[1].g==="now"?b[1].o:b[1].o+.5)).slice(0,12);
+  const missIds=new Set(S.q?[]:miss.map(([it])=>it.id));const rest=all.filter(([it])=>!missIds.has(it.id));
+  const nf=(S.price!=="all")+(S.time!=="all")+S.pk+S.ev+S.food+(S.pmr>0);
+  const g=grp(),chips=[];if(P&&(g.a+g.c>1||P.who==="team"))chips.push(`<button class="tag" id="grpTag">👥 ${t.grp(g.a,g.c)}</button>`);if(P?.mob&&P.mob!=="none")chips.push(`<span class="tag">${t.wiz.mobO[P.mob][0]} ${t.wiz.mobO[P.mob][1]}</span>`);
+  $("status").innerHTML=`<span class="count">${t.count(all.length)}</span><input id="q" type="search" placeholder="🔎" value="${S.qr||""}">${chips.join("")}<button class="ibtn fbtn" id="btnF">⚙︎ ${t.filters}${nf?`<span>${nf}</span>`:""}</button>`;
+  $("btnF").onclick=openFilters;if($("grpTag"))$("grpTag").onclick=openFilters;
+  const qi=$("q");qi.oninput=e=>{S.qr=e.target.value;S.q=S.qr.trim().toLowerCase();PAGE=1;clearTimeout(window._q);window._q=setTimeout(()=>{render();const n=$("q");n.focus();n.setSelectionRange(n.value.length,n.value.length)},250)};
+  let h="";const lim=PAGE*24;
+  if(miss.length&&!S.q)h+=`<h2>${t.miss}<small>${miss.length}</small></h2><div class="hrail">${miss.map(([it,st])=>card(it,st)).join("")}</div>`;
+  if(rest.length)h+=`<h2>${missIds.size?t.ideasMore:t.ideas}<small>${rest.length}</small></h2><div class="grid">${rest.slice(0,lim).map(([it,st])=>card(it,st)).join("")}</div>${rest.length>lim?`<button class="more" data-more="1">${t.showMore(rest.length-lim)}</button>`:""}`;
+  if(closed.length)h+=SHOWCLOSED?`<h2>${t.closed}<small>${closed.length}</small></h2><div class="grid">${closed.map(([it,st])=>card(it,st)).join("")}</div>`:`<button class="more" data-closed="1">${t.showClosed(closed.length)}</button>`;
+  if(VIEW==="fav"){const fl=DATA.filter(it=>FAV.has(it.id)).map(it=>[it,status(it)]);const live=fl.filter(([,st])=>st.g!=="past").sort((a,b)=>(a[1].g==="now"||a[1].g==="soon"?0:1)-(b[1].g==="now"||b[1].g==="soon"?0:1)||a[1].o-b[1].o),past=fl.filter(([,st])=>st.g==="past");
+    $("status").innerHTML=`<span class="count">❤️ ${t.favT} (${live.length})</span>`;
+    h=live.length?`<div class="grid">${live.map(([it,st])=>card(it,st)).join("")}</div>`:`<div class="empty">${t.favEmpty}</div>`;
+    if(past.length)h+=`<h2>${t.favPast}<small>${past.length}</small></h2><div class="grid">${past.map(([it])=>card(it,{lbl:t.favPast,c:""})).join("")}</div>`}
+  $("list").innerHTML=h||`<div class="empty">${t.empty}</div>`;
+  $("foot").innerHTML=`${t.foot(fmt(UPD))} · <button id="btnSrc">${t.sources}</button>`;$("btnSrc").onclick=openSources}
+function navbar(){const t=T(),nf=(S.price!=="all")+(S.time!=="all")+S.pk+S.ev+S.food+(S.pmr>0);
+  $("nav").innerHTML=[["explore","🧭",t.nav.explore,""],["fav","♥",t.nav.fav,FAV.size],["filters","⚙︎",t.nav.filters,nf],["profile","👤",t.nav.profile,""]].map(([k,ic,l,n])=>`<button class="${(k===VIEW)?"on":""}" data-nav="${k}"><b>${ic}${n?`<i>${n}</i>`:""}</b><span>${l}</span></button>`).join("")}
+// ---------- sheets
+function openSheet(html,keep){const y=$("sheet").scrollTop;$("sheet").innerHTML=html;$("ov").classList.add("on");$("sheet").scrollTop=keep?y:0}
+function closeSheet(){$("ov").classList.remove("on")}
+$("ov").addEventListener("click",e=>{const df=e.target.closest("[data-dfav]");if(df){toggleFav(df.dataset.dfav);const on=isFav(df.dataset.dfav);df.classList.toggle("on",on);df.textContent=on?"♥":"♡";render();return}if(e.target.id==="ov"||e.target.closest(".x"))closeSheet()});
+function openDetail(id){const it=DATA.find(x=>x.id===id),t=T(),st=status(it),tr=travel(it),[ic,bg]=CAT[it.cat]||["✦","#eee"];
+  const name=tx(it.t),from=S.from.split("/")[0],stop=it.addr||it.stop||it.city,q=encodeURIComponent,ll=`${it.lat},${it.lon}`,[E,N]=lv95(it.lat,it.lon);
+  const dest=it.addr?q(it.addr):(it.kind==="perm"&&it.cat!=="hike"&&it.cat!=="view"?q(name+", "+it.city):ll);const site=it.url||`https://www.google.com/search?q=${q(name+" "+it.city+" site officiel")}`;
+  const sbb=`https://www.sbb.ch/${t.sbbPath}/pages/fahrplan/fahrplan.xhtml?von=${q(from)}&nach=${q(stop)}`;
+  const car=`https://www.google.com/maps/dir/?api=1&origin=${q(from+", Switzerland")}&destination=${dest}&travelmode=driving`;
+  const park=`https://www.google.com/maps/search/parking/@${ll},16z`,food=`https://www.google.com/maps/search/restaurant/@${ll},16z`;
+  const ev=`https://map.geo.admin.ch/?lang=${L}&E=${E}&N=${N}&zoom=9&layers=ch.bfe.ladestellen-elektromobilitaet`;
+  const row=(k,lab,val,sub="")=>`<div class="drow"><span class="k">${k}</span><div><small>${lab}</small>${val}${sub?`<small>${sub}</small>`:""}</div></div>`;
+  const virt=it.virtual;
+  openSheet(`<div class="sh-h"><h3>${name}</h3><button class="hfav ${isFav(it.id)?"on":""}" data-dfav="${it.id}">${isFav(it.id)?"♥":"♡"}</button><button class="x">✕</button></div><div class="sb">
+  <div class="dthumb" style="background:${bg}">${ic}<span class="rib ${st.c}">${it.from&&it.kind!=="perm"?(st.c==="end"?st.lbl+" · ":"")+`${fmt(it.from)} → ${fmt(it.to)}`:st.lbl}</span></div>
+  ${it.d?`<p class="desc">${tx(it.d)}</p>`:""}${!virt?`<a class="addr" href="https://www.google.com/maps/search/?api=1&query=${dest}" target="_blank" rel="noopener">📍 ${it.addr||it.city+" ("+it.cn+")"} ↗</a>`:""}
+  <div class="acts"><a class="pri" href="${site}" target="_blank" rel="noopener">${it.url?"🌐 "+t.act.site:"🔎 "+t.act.find}</a>${virt?"":`
+  ${it.pt?`<a href="${sbb}" target="_blank" rel="noopener">🚆 ${t.act.sbb}</a>`:""}<a href="${car}" target="_blank" rel="noopener">🚗 ${t.act.car}</a>
+  <a href="${park}" target="_blank" rel="noopener">🅿️ ${t.act.park}</a><a href="${ev}" target="_blank" rel="noopener">${t.act.ev}</a>
+  <a href="${food}" target="_blank" rel="noopener">🍴 ${t.act.food}</a>`}</div>
+  <div class="facts">${row("💶",t.lab.price,priceTxt(it.price),[it.price.n?tx(it.price.n):"",(()=>{const g=grp(),tt=total(it.price);return tt!=null&&g.a+g.c>1?`<b>${t.total} ${t.grp(g.a,g.c)} : CHF ${chf(tt)}</b>`:""})()].filter(Boolean).join("<br>"))}
+  ${virt?"":row("🧭",t.lab.time,`🚗 ${hm(tr.car)} ${t.car}${tr.tp?` · 🚆 ≈ ${hm(tr.tp)} ${t.train}`:""}`,`${S.from} → ${it.city} (${it.cn})`)}
+  ${it.dur?row("⏱️",t.lab.dur,it.dur):""}
+  ${virt?"":row("🅿️",t.lab.park,t.park[it.park])+row("⚡",t.lab.ev,t.ev[it.ev])}
+  ${virt?"":row("🍴",t.lab.food,t.food[it.food==null?"null":it.food])}
+  ${virt?"":row("♿",t.lab.pmr,t.pmr[it.pmr==null?"null":it.pmr])}
+  ${row("🏠",t.lab.io,t.io[String(it.in)])}</div>
+  </div>`)}
+function openFilters(keep){const t=T().f;const seg=(key,opts)=>`<div class="seg">${opts.map(([v,l])=>`<button class="${String(S[key])===String(v)?"on":""}" data-k="${key}" data-v="${v}">${l}</button>`).join("")}</div>`;
+  const tog=(key,l)=>`<button class="${S[key]?"on":""}" data-tog="${key}">${l}</button>`;const pm=T().pmr;const g=grp();const stp=(k,l,min)=>`<span class="stp">${l} <button data-st="${k}" data-d="-1" data-min="${min}">−</button><b>${k==="na"?g.a:g.c}</b><button data-st="${k}" data-d="1" data-min="${min}">+</button></span>`;
+  openSheet(`<div class="sh-h"><h3>${T().filters}</h3><button class="x">✕</button></div><div class="sb" id="fs">
+  <div class="fgroup"><p>👥 ${T().people}</p><div class="seg">${stp("na",T().adults,1)}${stp("nc",T().children,0)}</div></div>
+  <div class="fgroup"><p>${t.price}</p>${seg("price",[["all",t.pAll],["0",t.p0],["20",t.p20],["50",t.p50]])}</div>
+  <div class="fgroup"><p>${t.time}</p>${seg("time",[["all",t.tAll],["30","30′"],["60","1h"],["90","1h30"],["120","2h"]])}</div>
+  <div class="fgroup"><p>${t.park}</p><div class="seg">${tog("pk","🅿️ "+t.pk)}${tog("ev","⚡ "+t.ev)}</div></div>
+  <div class="fgroup"><p>🍴</p><div class="seg">${tog("food",t.food)}</div></div>
+  <div class="fgroup"><p>${t.pmr}</p>${seg("pmr",[[0,t.tAll],[1,"🦯 "+pm[1]],[2,"♿ "+pm[2]]])}</div>
+  </div><div class="sfoot"><button class="btn" id="fReset">${t.reset}</button><button class="btn pri" id="fApply">${t.apply}</button></div>`,keep===1);
+  $("fs").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.st){const g=grp();P=P||{};const k=b.dataset.st;P[k]=Math.max(+b.dataset.min,(k==="na"?g.a:g.c)+(+b.dataset.d));if(k==="na")P.nc=g.c;else P.na=g.a;store.set("esc_p2",P)}else if(b.dataset.tog){S[b.dataset.tog]=!S[b.dataset.tog]}else if(b.dataset.k){S[b.dataset.k]=b.dataset.k==="pmr"?+b.dataset.v:b.dataset.v}openFilters(1)};
+  $("fReset").onclick=()=>{Object.assign(S,{price:"all",time:"all",pk:false,ev:false,food:false,pmr:0});openFilters()};
+  $("fApply").onclick=()=>{closeSheet();render()}}
+function openSources(){const t=T();openSheet(`<div class="sh-h"><h3>${t.srcT}</h3><button class="x">✕</button></div><div class="sb"><p class="desc">${t.srcS}</p><div class="src">${SRC.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${s.name}<span>${s.area} ↗</span></a>`).join("")}</div></div>`)}
+// ---------- wizard
+let W={i:0,d:{}},WL=-1;
+function wiz(){const keep=WL===W.i;WL=W.i;const t=T().wiz,d=W.d,steps=["who",...(d.who==="kids"?["age"]:[]),...(["kids","friends","team","seniors"].includes(d.who)?["size"]:[]),"mob","likes","budget","move"],k=steps[W.i],last=W.i===steps.length-1;
+  const opt=(key,v,ic,l,multi)=>`<button class="opt ${(multi?(d[key]||[]).includes(v):d[key]==v)?"on":""}" data-key="${key}" data-v="${v}" data-m="${multi?1:0}"><b>${ic}</b>${l}</button>`;
+  const Q={who:[t.who,Object.entries(t.whoO).map(([v,[i,l]])=>opt("who",v,i,l))],age:[t.age,Object.entries(t.ages).map(([v,l])=>opt("age",v,"🧒",l))],mob:[t.mob,Object.entries(t.mobO).map(([v,[i,l]])=>opt("mob",v,i,l))],
+    likes:[t.likes,Object.keys(CAT).map(c=>opt("likes",c,CAT[c][0],T().tiles[c],1))],size:[T().size,[`<div class="stps">${[["na",T().adults,1],["nc",T().children,0]].map(([k,l,min])=>`<div class="stpbig"><span>${l}</span><button class="opt" data-key="${k}" data-v="${Math.max(min,(+(d[k]??(k==="na"?2:(d.who==="kids"?1:0))))-1)}">−</button><b>${d[k]??(k==="na"?2:(d.who==="kids"?1:0))}</b><button class="opt" data-key="${k}" data-v="${(+(d[k]??(k==="na"?2:(d.who==="kids"?1:0))))+1}">+</button></div>`).join("")}</div>`]],budget:[t.budget,Object.entries(t.bud).map(([v,[i,l]])=>opt("budget",v,i,l))],move:[t.move,Object.entries(t.moveO).map(([v,[i,l]])=>opt("move",v,i,l))]}[k];
+  openSheet(`<div class="sh-h"><h3>${t.title}</h3><button class="x">✕</button></div><div class="sb"><div class="prog">${steps.map((_,i)=>`<i class="${i<=W.i?"on":""}"></i>`).join("")}</div><p class="q">${Q[0]}</p><div class="opts" id="wo">${Q[1].join("")}</div></div>
+  <div class="sfoot">${W.i?`<button class="btn" id="wB">${t.back}</button>`:""}<button class="btn pri" id="wN">${last?t.done:t.next}</button></div>`,keep);
+  $("wo").onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const{key,v,m}=b.dataset;if(m==="1"){const a=d[key]||[];d[key]=a.includes(v)?a.filter(x=>x!==v):[...a,v]}else{d[key]=v;if(!last&&key!=="na"&&key!=="nc"){W.i++;}}wiz()};
+  if($("wB"))$("wB").onclick=()=>{W.i--;wiz()};
+  $("wN").onclick=()=>{if(!last){W.i++;wiz();return}const dn=d.who==="couple"?2:d.who==="kids"||d.who==="friends"||d.who==="team"||d.who==="seniors"?2:1;P={who:d.who,na:+(d.na??dn),nc:+(d.nc??(d.who==="kids"?1:0)),age:d.age!=null?+d.age:null,mob:d.mob||"none",likes:d.likes||[],budget:d.budget!=null?+d.budget:null,move:d.move||"car"};store.set("esc_p2",P);closeSheet();render()}}
+function openWiz(){WL=-1;W={i:0,d:P?{...P,likes:[...(P.likes||[])]}:{}};wiz()}
+// ---------- events
+$("lang").onclick=e=>{const l=e.target.dataset.l;if(l){L=l;store.set("esc_lang",L);render()}};
+$("rail").onclick=e=>{const b=e.target.closest(".tile");if(!b)return;S.uni=b.dataset.u;S.sub="all";PAGE=1;render();scrollTo({top:0,behavior:"smooth"})};
+$("bar2").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.sub)S.sub=b.dataset.sub;else if(b.dataset.q)S[b.dataset.q]=!S[b.dataset.q];PAGE=1;render()};
+$("bar2").onchange=e=>{if(e.target.id==="when"){S.when=e.target.value;PAGE=1;render()}};
+$("from").onchange=e=>{S.from=e.target.value;store.set("esc_from",S.from);render()};
+$("btnProfile").onclick=openWiz;
+$("nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset.nav;if(k==="filters")return openFilters();if(k==="profile")return openWiz();VIEW=k;PAGE=1;render();scrollTo({top:0})};
+$("list").onclick=e=>{const f=e.target.closest("[data-fav]");if(f){e.stopPropagation();toggleFav(f.dataset.fav);const on=isFav(f.dataset.fav);f.classList.toggle("on",on);f.textContent=on?"♥":"♡";if(VIEW==="fav")render();return}const c=e.target.closest(".card");if(c)return openDetail(c.dataset.id);const m=e.target.closest(".more");if(m){if(m.dataset.closed)SHOWCLOSED=true;else PAGE++;render()}};
+$("fab").onclick=()=>{const pool=DATA.filter(it=>pass(it)&&["now","soon","always"].includes(status(it).g)&&!it.virtual);if(!pool.length)return;const w=pool.map(it=>Math.max(1,score(it)+5));let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while((r-=w[i])>0)i++;openDetail(pool[i].id)};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSheet()});
+(function(){const nl=(navigator.language||"fr").slice(0,2);L=store.get("esc_lang")||(I[nl]?nl:"fr");P=store.get("esc_p2");FAV=new Set(store.get("esc_fav")||[]);const ss=store.get("esc_s");if(ss&&UNI[ss.uni])Object.assign(S,ss);const f=store.get("esc_from");if(f&&PLACES[f])S.from=f;
+  fetch("activities.json",{cache:"no-store"}).then(r=>r.json()).then(j=>{DATA=j.items;SRC=j.sources||[];UPD=j.updated;render();if(!P)openWiz()}).catch(()=>{$("list").innerHTML='<div class="empty">Data unavailable.</div>'})})();
+</script>
+</body>
+</html>

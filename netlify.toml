@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+
+# Les données changent souvent : on évite que le navigateur garde une ancienne version.
+[[headers]]
+  for = "/activities.json"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
